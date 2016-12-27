@@ -28,6 +28,7 @@ getSettings <- function(type, data,...){
     names(data_names) <- vars[1:length(data_names)]
     settings <- list(
       data_names = data_names
+      attributes = attributes
     )
   }
   if(type == "lines"){
