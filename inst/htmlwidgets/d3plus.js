@@ -15,7 +15,7 @@ HTMLWidgets.widget({
 
         var d3plus = instance;
         var vizId = el.id;
-        
+
         d3plusType = x.d3plusType;
         // console.log(d3plusType)
         // select the viz element and remove existing children
@@ -44,14 +44,16 @@ HTMLWidgets.widget({
             var sample_data = HTMLWidgets.dataframeToD3(x.data);
             var id = x.settings.data_names.id;
             var size = x.settings.data_names.size;
+            var group = x.settings.data_names.group;
             var color = x.settings.data_names.color;
             d3plus
                 .container("#" + vizId) // container DIV to hold the visualization
                 .data(sample_data) // data to use with the visualization
                 .type("tree_map")   // visualization type
-                .id(id) // nesting keys
+                .id([group,id]) // nesting keys
                 .size(size)         // key name to size bubbles
                 .color(color)
+                .depth(2)
                 .draw()
         }
 
@@ -94,8 +96,8 @@ HTMLWidgets.widget({
                     .attrs(attributes)
                     .color("color")
                     .draw()
-            } 
-            else{                
+            }
+            else{
                 d3plus
                     .container("#" + vizId) // container DIV to hold the visualization
                     .data(sample_data) // data to use with the visualization
@@ -164,7 +166,7 @@ HTMLWidgets.widget({
                         },
                         "type": "drop",
                         "value": x.data.nodes.id
-                    }];               
+                    }];
             }
 
             var edgesProps = {
@@ -172,7 +174,7 @@ HTMLWidgets.widget({
                 "label":"label",
                 "size": "size",
                 "color": "#A40"
-                };           
+                };
             var focus = {
                 "tooltip" : true,
                 "value"   : nodes[0].id

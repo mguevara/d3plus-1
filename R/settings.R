@@ -19,17 +19,22 @@ getData <- function(type,data, ...){
 
 getSettings <- function(type, data,...){
   args <- list(...)
+  print("ARGS")
+  print(args)
   focusDropdown <- args$focusDropdown %||% FALSE
   attributes <- args$attributes %||% NULL
 
   if(type == "tree"){
-    vars <- c("id","size","color") # add vars to opts
+    print(attributes)
+    print("HERRRE")
+    vars <- c("id","group", "size","color") # add vars to opts
     data_names <- as.list(names(data))
     names(data_names) <- vars[1:length(data_names)]
     settings <- list(
       data_names = data_names
-      attributes = attributes
+      #attributes = attributes
     )
+
   }
   if(type == "lines"){
     xAxis <- names(data)[1]
@@ -77,5 +82,6 @@ getSettings <- function(type, data,...){
     )
   }
 
+  print(settings)
   settings
 }
